@@ -1,0 +1,287 @@
+/* Russian Social Styles */
+.russian-share-buttons {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #0073aa;
+}
+
+.russian-share-buttons h4 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.share-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.share-btn.vk {
+    background: #4a76a8;
+}
+
+.share-btn.ok {
+    background: #ff8c00;
+}
+
+.share-btn.telegram {
+    background: #0088cc;
+}
+
+.share-btn.yandex {
+    background: #ffcc00;
+    color: #000;
+}
+
+.share-btn.mailru {
+    background: #168de2;
+}
+
+.telegram-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #0088cc;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.telegram-share-btn:hover {
+    background: #0077b5;
+    color: white;
+}
+
+.telegram-share-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Yandex Services */
+.yandex-search-widget {
+    margin: 1rem 0;
+}
+
+.yandex-search-widget form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.yandex-search-widget input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.yandex-search-widget button {
+    padding: 0.75rem 1.5rem;
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.yandex-donate {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.yandex-donate iframe {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.yandex-dzen-widget {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid #ffcc00;
+    border-radius: 8px;
+}
+
+/* VK Comments */
+#vk_comments {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Russian News Specific */
+.russian-news-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #ff3333, #cc0000);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+}
+
+.breaking-news-ru {
+    background: linear-gradient(135deg, #ff3333, #cc0000);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Cyrillic Typography */
+body {
+    font-family: 'Roboto', 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', 'PT Serif', Georgia, serif;
+    font-weight: 700;
+}
+
+/* Russian Calendar */
+.russian-date {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+}
+
+.russian-date::before {
+    content: '📅 ';
+    margin-right: 0.25rem;
+}
+
+/* Russian Weather Widget */
+.weather-widget {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.weather-widget .city {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.weather-widget .temperature {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Exchange Rates */
+.exchange-rates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.exchange-rate {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.exchange-rate .currency {
+    font-weight: bold;
+    color: #333;
+}
+
+.exchange-rate .rate {
+    font-size: 1.25rem;
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.exchange-rate .change {
+    font-size: 0.9rem;
+}
+
+.exchange-rate .change.positive {
+    color: #28a745;
+}
+
+.exchange-rate .change.negative {
+    color: #dc3545;
+}
+
+/* Russian Holidays */
+.holiday-banner {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #333;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+/* Mobile optimizations for Russian browsers */
+@media (max-width: 768px) {
+    .yandex-search-widget form {
+        flex-direction: column;
+    }
+    
+    .share-buttons-grid {
+        justify-content: center;
+    }
+    
+    .share-btn {
+        flex-grow: 1;
+        justify-content: center;
+    }
+    
+    #vk_comments {
+        padding: 0.5rem;
+    }
+    
+    .russian-share-buttons {
+        padding: 1rem;
+    }
+}
+
+/* Yandex.Browser specific */
+@supports (-webkit-touch-callout: none) {
+    .yandex-browser-fix {
+        -webkit-overflow-scrolling: touch;
+    }
+}

@@ -1,0 +1,232 @@
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    .content-area {
+        width: 100%;
+        float: none;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .sidebar {
+        width: 100%;
+        float: none;
+    }
+    
+    .footer-widgets-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 540px;
+    }
+    
+    /* Mobile Navigation */
+    .menu-toggle {
+        display: block;
+    }
+    
+    #primary-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--secondary-color);
+        flex-direction: column;
+        padding: 1rem 0;
+        z-index: 1000;
+    }
+    
+    #primary-menu.active {
+        display: flex;
+    }
+    
+    #primary-menu li {
+        width: 100%;
+    }
+    
+    #primary-menu a {
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .header-top .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .header-ads .ad-container {
+        width: 100%;
+        max-width: 728px;
+    }
+    
+    /* Breaking news */
+    .breaking-news .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .breaking-label {
+        margin-right: 0;
+        align-self: flex-start;
+    }
+    
+    /* Slider */
+    .slider-container {
+        height: 400px;
+    }
+    
+    .slide-title {
+        font-size: 1.5rem;
+    }
+    
+    .slide-content {
+        padding: 1rem;
+    }
+    
+    /* Single post */
+    .entry-title {
+        font-size: 2rem;
+    }
+    
+    .entry-meta {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    /* Footer */
+    .footer-bottom .container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-menu ul {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-widgets-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-ads .ad-container {
+        height: 60px;
+    }
+    
+    .site-branding .site-title {
+        font-size: 1.5rem;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+    
+    .slider-container {
+        height: 300px;
+    }
+    
+    .slide-title {
+        font-size: 1.25rem;
+    }
+    
+    .entry-title {
+        font-size: 1.75rem;
+    }
+    
+    .meta-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .post-meta {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    /* Category sections */
+    .category-posts-grid {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .category-post-large,
+    .category-posts-list {
+        width: 100%;
+    }
+    
+    /* Search form */
+    .search-form-container {
+        min-width: calc(100vw - 2rem);
+        right: -1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .site-header,
+    .main-navigation,
+    .breaking-news,
+    .sidebar,
+    .site-footer,
+    .back-to-top,
+    .post-share,
+    .comments-area,
+    .related-posts {
+        display: none !important;
+    }
+    
+    .content-area {
+        width: 100%;
+        float: none;
+        padding-right: 0;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+    }
+    
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+    
+    .entry-content {
+        font-size: 12pt;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
