@@ -1,4 +1,5 @@
-/* Russian Social Styles */
+/* Russian Social Styles - Без Яндекс сервисов */
+
 .russian-share-buttons {
     margin: 2rem 0;
     padding: 1.5rem;
@@ -48,11 +49,6 @@
     background: #0088cc;
 }
 
-.share-btn.yandex {
-    background: #ffcc00;
-    color: #000;
-}
-
 .share-btn.mailru {
     background: #168de2;
 }
@@ -77,53 +73,6 @@
 .telegram-share-btn svg {
     width: 20px;
     height: 20px;
-}
-
-/* Yandex Services */
-.yandex-search-widget {
-    margin: 1rem 0;
-}
-
-.yandex-search-widget form {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.yandex-search-widget input {
-    flex-grow: 1;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.yandex-search-widget button {
-    padding: 0.75rem 1.5rem;
-    background: #ffcc00;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.yandex-donate {
-    margin: 2rem 0;
-    text-align: center;
-}
-
-.yandex-donate iframe {
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.yandex-dzen-widget {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: #fff;
-    border: 1px solid #ffcc00;
-    border-radius: 8px;
 }
 
 /* VK Comments */
@@ -186,25 +135,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 0.25rem;
 }
 
-/* Russian Weather Widget */
-.weather-widget {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-}
-
-.weather-widget .city {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-}
-
-.weather-widget .temperature {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
 /* Exchange Rates */
 .exchange-rates {
     display: grid;
@@ -257,10 +187,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Mobile optimizations for Russian browsers */
 @media (max-width: 768px) {
-    .yandex-search-widget form {
-        flex-direction: column;
-    }
-    
     .share-buttons-grid {
         justify-content: center;
     }
@@ -279,9 +205,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Yandex.Browser specific */
-@supports (-webkit-touch-callout: none) {
-    .yandex-browser-fix {
-        -webkit-overflow-scrolling: touch;
+/* Print styles for legal documents */
+@media print {
+    .russian-share-buttons {
+        display: none;
     }
 }

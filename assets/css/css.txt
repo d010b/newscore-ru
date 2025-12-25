@@ -1,3 +1,7 @@
+﻿==========================================
+Р¤Р°Р№Р»: main.css
+==========================================
+
 /* NewsCore Main CSS - Responsive Version */
 
 /* Reset and Base Styles */
@@ -1004,3 +1008,961 @@ textarea:focus {
         transform: none;
     }
 }
+
+==========================================
+Р¤Р°Р№Р»: responsive.css
+==========================================
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    .content-area {
+        width: 100%;
+        float: none;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .sidebar {
+        width: 100%;
+        float: none;
+    }
+    
+    .footer-widgets-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 540px;
+    }
+    
+    /* Mobile Navigation */
+    .menu-toggle {
+        display: block;
+    }
+    
+    #primary-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--secondary-color);
+        flex-direction: column;
+        padding: 1rem 0;
+        z-index: 1000;
+    }
+    
+    #primary-menu.active {
+        display: flex;
+    }
+    
+    #primary-menu li {
+        width: 100%;
+    }
+    
+    #primary-menu a {
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .header-top .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .header-ads .ad-container {
+        width: 100%;
+        max-width: 728px;
+    }
+    
+    /* Breaking news */
+    .breaking-news .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .breaking-label {
+        margin-right: 0;
+        align-self: flex-start;
+    }
+    
+    /* Slider */
+    .slider-container {
+        height: 400px;
+    }
+    
+    .slide-title {
+        font-size: 1.5rem;
+    }
+    
+    .slide-content {
+        padding: 1rem;
+    }
+    
+    /* Single post */
+    .entry-title {
+        font-size: 2rem;
+    }
+    
+    .entry-meta {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    /* Footer */
+    .footer-bottom .container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-menu ul {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-widgets-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-ads .ad-container {
+        height: 60px;
+    }
+    
+    .site-branding .site-title {
+        font-size: 1.5rem;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.75rem; }
+    h3 { font-size: 1.5rem; }
+    h4 { font-size: 1.25rem; }
+    
+    .slider-container {
+        height: 300px;
+    }
+    
+    .slide-title {
+        font-size: 1.25rem;
+    }
+    
+    .entry-title {
+        font-size: 1.75rem;
+    }
+    
+    .meta-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .post-meta {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    /* Category sections */
+    .category-posts-grid {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .category-post-large,
+    .category-posts-list {
+        width: 100%;
+    }
+    
+    /* Search form */
+    .search-form-container {
+        min-width: calc(100vw - 2rem);
+        right: -1rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .site-header,
+    .main-navigation,
+    .breaking-news,
+    .sidebar,
+    .site-footer,
+    .back-to-top,
+    .post-share,
+    .comments-area,
+    .related-posts {
+        display: none !important;
+    }
+    
+    .content-area {
+        width: 100%;
+        float: none;
+        padding-right: 0;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+    }
+    
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+    
+    .entry-content {
+        font-size: 12pt;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+}
+
+==========================================
+Р¤Р°Р№Р»: roskomnadzor.css
+==========================================
+
+/* Roskomnadzor Requirements Styles */
+
+/* Cookie Notice */
+.roskom-cookie-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 1rem;
+    z-index: 9999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.cookie-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.cookie-content {
+    flex: 1;
+}
+
+.cookie-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.cookie-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.cookie-links {
+    margin-top: 0.5rem;
+}
+
+.cookie-link {
+    color: #4fc3f7;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-right: 1rem;
+}
+
+.cookie-link:hover {
+    text-decoration: underline;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.cookie-btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cookie-accept {
+    background: #4caf50;
+    color: white;
+}
+
+.cookie-accept:hover {
+    background: #45a049;
+}
+
+.cookie-reject {
+    background: #757575;
+    color: white;
+}
+
+.cookie-reject:hover {
+    background: #616161;
+}
+
+/* Age Restriction Gate */
+.roskom-age-gate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.age-gate-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.age-logo {
+    margin-bottom: 1.5rem;
+}
+
+.age-18 {
+    display: inline-block;
+    background: #ff3333;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    border-radius: 50%;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.age-gate-content h2 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.age-gate-content p {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.age-form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.age-input-group {
+    flex: 1;
+    min-width: 100px;
+}
+
+.age-input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.age-select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: white;
+}
+
+.age-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.age-btn {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.age-confirm {
+    background: #4caf50;
+    color: white;
+}
+
+.age-confirm:hover {
+    background: #45a049;
+}
+
+.age-exit {
+    background: #f44336;
+    color: white;
+}
+
+.age-exit:hover {
+    background: #d32f2f;
+}
+
+.age-warning {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    color: #ff5722;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Post Age Badge */
+.post-age-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+}
+
+.post-age-badge.age-18 {
+    background: #ffebee;
+    border-left-color: #f44336;
+}
+
+.post-age-badge.age-16 {
+    background: #fff8e1;
+    border-left-color: #ffc107;
+}
+
+.post-age-badge.age-12 {
+    background: #e8f5e9;
+    border-left-color: #4caf50;
+}
+
+.post-age-badge.age-6 {
+    background: #e3f2fd;
+    border-left-color: #2196f3;
+}
+
+.age-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.age-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Personal Data Consent */
+.personal-data-consent {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.consent-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.consent-checkbox input[type="checkbox"] {
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+}
+
+.consent-text {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.consent-checkbox input:checked + .consent-text {
+    color: #4caf50;
+}
+
+/* Media Information */
+.media-info {
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.media-info > div {
+    margin-bottom: 0.5rem;
+}
+
+.media-info strong {
+    color: #333;
+}
+
+.media-info a {
+    color: #0073aa;
+}
+
+.media-info a:hover {
+    text-decoration: underline;
+}
+
+/* Prohibited Content Warning */
+.prohibited-content-warning {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    color: #856404;
+}
+
+.prohibited-content-warning p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Legal Information */
+.legal-info {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.legal-info h4 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 2px solid #0073aa;
+    padding-bottom: 0.5rem;
+}
+
+.legal-details p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.legal-details strong {
+    color: #333;
+    min-width: 150px;
+    display: inline-block;
+}
+
+/* Privacy Policy Shortcode */
+.privacy-policy-shortcode,
+.user-agreement-shortcode {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.privacy-policy-shortcode h3,
+.user-agreement-shortcode h3 {
+    color: #0073aa;
+    margin-top: 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #0073aa;
+}
+
+.policy-date,
+.policy-update {
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.policy-sections,
+.agreement-sections {
+    margin-top: 2rem;
+}
+
+.policy-sections section,
+.agreement-sections section {
+    margin-bottom: 1.5rem;
+}
+
+.policy-sections h4,
+.agreement-sections h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.policy-sections p,
+.agreement-sections p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* GDPR Admin */
+.gdpr-actions {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 600px;
+}
+
+.gdpr-actions h2 {
+    margin-top: 0;
+}
+
+.gdpr-actions hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cookie-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .cookie-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .cookie-btn {
+        flex: 1;
+        max-width: 150px;
+    }
+    
+    .age-form {
+        flex-direction: column;
+    }
+    
+    .age-input-group {
+        min-width: 100%;
+    }
+    
+    .age-actions {
+        flex-direction: column;
+    }
+    
+    .age-btn {
+        width: 100%;
+    }
+    
+    .legal-details strong {
+        min-width: 120px;
+    }
+}
+
+/* Print styles for legal documents */
+@media print {
+    .roskom-cookie-notice,
+    .roskom-age-gate {
+        display: none !important;
+    }
+    
+    .privacy-policy-shortcode,
+    .user-agreement-shortcode {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+==========================================
+Р¤Р°Р№Р»: russian.css
+==========================================
+
+/* Russian Social Styles - Без Яндекс сервисов */
+
+.russian-share-buttons {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #0073aa;
+}
+
+.russian-share-buttons h4 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.share-buttons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.share-btn.vk {
+    background: #4a76a8;
+}
+
+.share-btn.ok {
+    background: #ff8c00;
+}
+
+.share-btn.telegram {
+    background: #0088cc;
+}
+
+.share-btn.mailru {
+    background: #168de2;
+}
+
+.telegram-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #0088cc;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.telegram-share-btn:hover {
+    background: #0077b5;
+    color: white;
+}
+
+.telegram-share-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* VK Comments */
+#vk_comments {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Russian News Specific */
+.russian-news-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, #ff3333, #cc0000);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+}
+
+.breaking-news-ru {
+    background: linear-gradient(135deg, #ff3333, #cc0000);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Cyrillic Typography */
+body {
+    font-family: 'Roboto', 'PT Sans', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', 'PT Serif', Georgia, serif;
+    font-weight: 700;
+}
+
+/* Russian Calendar */
+.russian-date {
+    font-family: 'Roboto', sans-serif;
+    color: #666;
+}
+
+.russian-date::before {
+    content: '📅 ';
+    margin-right: 0.25rem;
+}
+
+/* Exchange Rates */
+.exchange-rates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.exchange-rate {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.exchange-rate .currency {
+    font-weight: bold;
+    color: #333;
+}
+
+.exchange-rate .rate {
+    font-size: 1.25rem;
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.exchange-rate .change {
+    font-size: 0.9rem;
+}
+
+.exchange-rate .change.positive {
+    color: #28a745;
+}
+
+.exchange-rate .change.negative {
+    color: #dc3545;
+}
+
+/* Russian Holidays */
+.holiday-banner {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #333;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+/* Mobile optimizations for Russian browsers */
+@media (max-width: 768px) {
+    .share-buttons-grid {
+        justify-content: center;
+    }
+    
+    .share-btn {
+        flex-grow: 1;
+        justify-content: center;
+    }
+    
+    #vk_comments {
+        padding: 0.5rem;
+    }
+    
+    .russian-share-buttons {
+        padding: 1rem;
+    }
+}
+
+/* Print styles for legal documents */
+@media print {
+    .russian-share-buttons {
+        display: none;
+    }
+}
+
+==========================================
+Р¤Р°Р№Р»: style.css
+==========================================
+
+/*
+Theme Name: NewsCore
+Theme URI: https://example.com/newscore
+Author: Your Name
+Author URI: https://example.com
+Description: Professional news portal WordPress theme. Fast, SEO-optimized, mobile-friendly.
+Version: 1.0.0
+License: GPL v2 or later
+Text Domain: newscore
+Tags: news, blog, magazine, responsive, custom-menu, featured-images, translation-ready
+*/
+
+/* Основные стили вынесены в отдельные файлы в папке assets */

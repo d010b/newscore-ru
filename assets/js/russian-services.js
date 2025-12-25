@@ -1,270 +1,512 @@
 /**
- * Russian Services Integration
+ * Russian Services Integration - Secure Version 2.0.1
+ * Безопасная интеграция с российскими сервисами
  */
 
-jQuery(document).ready(function($) {
+(function($) {
     'use strict';
     
-    // Загрузка погоды от Яндекс
-    function loadYandexWeather() {
-        $('.weather-widget').each(function() {
-            var $widget = $(this);
-            var city = $widget.data('city');
-            
-            $.ajax({
-                url: 'https://api.weather.yandex.ru/v2/forecast',
-                method: 'GET',
-                data: {
-                    lat: getCityCoords(city).lat,
-                    lon: getCityCoords(city).lon,
-                    lang: 'ru_RU',
-                    limit: 1
-                },
-                headers: {
-                    'X-Yandex-API-Key': 'your-api-key-here' // Нужно получить на https://developer.tech.yandex.ru/
-                },
-                success: function(response) {
-                    if (response.fact) {
-                        var html = '<div class="weather-info">';
-                        html += '<div class="city">' + city + '</div>';
-                        html += '<div class="temperature">' + response.fact.temp + '°C</div>';
-                        html += '<div class="condition">' + response.fact.condition + '</div>';
-                        html += '<div class="details">';
-                        html += '<span class="wind">Ветер: ' + response.fact.wind_speed + ' м/с</span>';
-                        html += '<span class="humidity">Влажность: ' + response.fact.humidity + '%</span>';
-                        html += '</div>';
-                        html += '</div>';
-                        
-                        $widget.html(html);
-                    }
-                },
-                error: function() {
-                    $widget.html('<div class="weather-error">Не удалось загрузить погоду</div>');
-                }
-            });
-        });
+    // Проверка наличия объекта
+    if (typeof newscore_ru_secure === 'undefined') {
+        console.warn('Конфигурация российских сервисов не загружена');
+        return;
     }
     
-    // Координаты городов России
-    function getCityCoords(city) {
-        var cities = {
-            'Москва': { lat: 55.7558, lon: 37.6173 },
-            'Санкт-Петербург': { lat: 59.9343, lon: 30.3351 },
-            'Новосибирск': { lat: 55.0084, lon: 82.9357 },
-            'Екатеринбург': { lat: 56.8389, lon: 60.6057 },
-            'Казань': { lat: 55.7961, lon: 49.1064 },
-            'Нижний Новгород': { lat: 56.3269, lon: 44.025 },
-            'Челябинск': { lat: 55.1644, lon: 61.4368 },
-            'Самара': { lat: 53.1959, lon: 50.1002 },
-            'Омск': { lat: 54.9893, lon: 73.3682 },
-            'Ростов-на-Дону': { lat: 47.222, lon: 39.718 },
-            'Уфа': { lat: 54.7348, lon: 55.9578 },
-            'Красноярск': { lat: 56.0153, lon: 92.8932 },
-            'Воронеж': { lat: 51.672, lon: 39.1843 },
-            'Пермь': { lat: 58.0105, lon: 56.2502 },
-            'Волгоград': { lat: 48.708, lon: 44.5133 }
-        };
+    const RussianServices = {
         
-        return cities[city] || cities['Москва'];
-    }
-    
-    // Загрузка курсов валют ЦБ РФ
-    function loadExchangeRates() {
-        $('.exchange-rates-widget').each(function() {
-            var $widget = $(this);
+        // Конфигурация
+        config: {
+            apiEndpoints: {
+                weather: 'https://api.weather.yandex.ru/v2/forecast',
+                currency: 'https://www.cbr-xml-daily.ru/daily_json.js',
+                geolocation: 'https://api.sypexgeo.net/json/',
+                yandexMaps: 'https://api-maps.yandex.ru/2.1/'
+            },
+            cacheDuration: {
+                weather: 1800000, // 30 минут
+                currency: 300000, // 5 минут
+                location: 86400000 // 24 часа
+            }
+        },
+        
+        // Инициализация
+        init: function() {
+            this.loadWeather();
+            this.loadCurrencyRates();
+            this.initYandexMaps();
+            this.detectUserRegion();
+            this.initRussianHolidays();
+            this.optimizeForRussianBrowsers();
+        },
+        
+        // Погода от Яндекс (безопасная)
+        loadWeather: function() {
+            const $widgets = $('.weather-widget');
             
-            $.ajax({
-                url: 'https://www.cbr-xml-daily.ru/daily_json.js',
-                method: 'GET',
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    var html = '<div class="exchange-rates">';
-                    
-                    // USD
-                    if (data.Valute.USD) {
-                        var usd = data.Valute.USD;
-                        var change = usd.Value - usd.Previous;
-                        var changeClass = change > 0 ? 'positive' : 'negative';
-                        html += '<div class="exchange-rate">';
-                        html += '<div class="currency">USD/₽</div>';
-                        html += '<div class="rate">' + usd.Value.toFixed(2) + '</div>';
-                        html += '<div class="change ' + changeClass + '">' + (change > 0 ? '+' : '') + change.toFixed(2) + '</div>';
-                        html += '</div>';
-                    }
-                    
-                    // EUR
-                    if (data.Valute.EUR) {
-                        var eur = data.Valute.EUR;
-                        var change = eur.Value - eur.Previous;
-                        var changeClass = change > 0 ? 'positive' : 'negative';
-                        html += '<div class="exchange-rate">';
-                        html += '<div class="currency">EUR/₽</div>';
-                        html += '<div class="rate">' + eur.Value.toFixed(2) + '</div>';
-                        html += '<div class="change ' + changeClass + '">' + (change > 0 ? '+' : '') + change.toFixed(2) + '</div>';
-                        html += '</div>';
-                    }
-                    
-                    // CNY
-                    if (data.Valute.CNY) {
-                        var cny = data.Valute.CNY;
-                        var change = cny.Value - cny.Previous;
-                        var changeClass = change > 0 ? 'positive' : 'negative';
-                        html += '<div class="exchange-rate">';
-                        html += '<div class="currency">CNY/₽</div>';
-                        html += '<div class="rate">' + cny.Value.toFixed(2) + '</div>';
-                        html += '<div class="change ' + changeClass + '">' + (change > 0 ? '+' : '') + change.toFixed(2) + '</div>';
-                        html += '</div>';
-                    }
-                    
-                    html += '</div>';
-                    $widget.html(html);
-                },
-                error: function() {
-                    $widget.html('<div class="exchange-error">Не удалось загрузить курсы валют</div>');
-                }
-            });
-        });
-    }
-    
-    // Яндекс.Карты
-    function initYandexMaps() {
-        if (typeof ymaps !== 'undefined') {
-            $('[data-yandex-map]').each(function() {
-                var $map = $(this);
-                var lat = $map.data('lat');
-                var lon = $map.data('lon');
-                var zoom = $map.data('zoom') || 12;
+            if (!$widgets.length || !newscore_ru_secure.yandex_api_key) {
+                return;
+            }
+            
+            $widgets.each((index, widget) => {
+                const $widget = $(widget);
+                const city = $widget.data('city') || newscore_ru_secure.weather_city;
+                const coords = this.getCityCoordinates(city);
                 
-                ymaps.ready(function() {
-                    var map = new ymaps.Map($map.attr('id'), {
-                        center: [lat, lon],
-                        zoom: zoom,
-                        controls: ['zoomControl', 'fullscreenControl']
-                    });
-                    
-                    var placemark = new ymaps.Placemark([lat, lon], {
-                        balloonContent: $map.data('title') || 'Наш офис'
-                    });
-                    
-                    map.geoObjects.add(placemark);
+                // Проверяем кэш
+                const cacheKey = 'weather_' + city;
+                const cached = localStorage.getItem(cacheKey);
+                
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    if (Date.now() - data.timestamp < this.config.cacheDuration.weather) {
+                        this.renderWeather($widget, data.weather);
+                        return;
+                    }
+                }
+                
+                // Запрос через сервер (безопасно)
+                $.ajax({
+                    url: newscore_ru_secure.ajaxurl,
+                    method: 'POST',
+                    data: {
+                        action: 'get_yandex_weather',
+                        city: city,
+                        lat: coords.lat,
+                        lon: coords.lon,
+                        nonce: newscore_ru_secure.nonce
+                    }
+                })
+                .done((response) => {
+                    if (response.success) {
+                        this.renderWeather($widget, response.data);
+                        
+                        // Кэшируем
+                        localStorage.setItem(cacheKey, JSON.stringify({
+                            weather: response.data,
+                            timestamp: Date.now()
+                        }));
+                    } else {
+                        this.renderWeatherError($widget);
+                    }
+                })
+                .fail(() => {
+                    this.renderWeatherError($widget);
                 });
             });
-        }
-    }
-    
-    // Трекер для российских соцсетей
-    function trackRussianSocialShares() {
-        $('.share-btn').on('click', function(e) {
-            var social = $(this).hasClass('vk') ? 'vk' :
-                        $(this).hasClass('ok') ? 'ok' :
-                        $(this).hasClass('telegram') ? 'telegram' :
-                        $(this).hasClass('yandex') ? 'yandex' : 'mailru';
+        },
+        
+        // Курсы валют ЦБ РФ
+        loadCurrencyRates: function() {
+            const $widgets = $('.exchange-rates-widget');
             
-            // Отправляем данные в Яндекс.Метрику
-            if (typeof ym !== 'undefined') {
-                ym(<?php echo get_theme_mod('yandex_metrika_id', 0); ?>, 'reachGoal', 'social_share_' + social);
+            if (!$widgets.length) return;
+            
+            // Проверяем кэш
+            const cacheKey = 'currency_rates';
+            const cached = localStorage.getItem(cacheKey);
+            
+            if (cached) {
+                const data = JSON.parse(cached);
+                if (Date.now() - data.timestamp < this.config.cacheDuration.currency) {
+                    this.renderCurrencyRates($widgets, data.rates);
+                    return;
+                }
             }
             
-            // Google Analytics
+            // Запрос курсов
+            $.ajax({
+                url: this.config.apiEndpoints.currency,
+                method: 'GET',
+                dataType: 'json',
+                timeout: 5000
+            })
+            .done((data) => {
+                if (data && data.Valute) {
+                    this.renderCurrencyRates($widgets, data.Valute);
+                    
+                    // Кэшируем
+                    localStorage.setItem(cacheKey, JSON.stringify({
+                        rates: data.Valute,
+                        timestamp: Date.now()
+                    }));
+                } else {
+                    this.renderCurrencyError($widgets);
+                }
+            })
+            .fail(() => {
+                this.renderCurrencyError($widgets);
+            });
+        },
+        
+        // Яндекс.Карты
+        initYandexMaps: function() {
+            const $maps = $('[data-yandex-map]');
+            
+            if (!$maps.length) return;
+            
+            // Загружаем API Яндекс.Карт
+            if (typeof ymaps === 'undefined') {
+                this.loadYandexMapsAPI().then(() => {
+                    this.renderMaps($maps);
+                });
+            } else {
+                this.renderMaps($maps);
+            }
+        },
+        
+        // Определение региона пользователя
+        detectUserRegion: function() {
+            const cacheKey = 'user_location';
+            const cached = localStorage.getItem(cacheKey);
+            
+            if (cached) {
+                const data = JSON.parse(cached);
+                if (Date.now() - data.timestamp < this.config.cacheDuration.location) {
+                    this.updateRegionalContent(data.location);
+                    return;
+                }
+            }
+            
+            // Запрос геолокации через наш сервер
+            $.ajax({
+                url: newscore_ru_secure.ajaxurl,
+                method: 'POST',
+                data: {
+                    action: 'detect_user_region',
+                    nonce: newscore_ru_secure.nonce
+                }
+            })
+            .done((response) => {
+                if (response.success) {
+                    const location = response.data;
+                    
+                    // Сохраняем в кэш
+                    localStorage.setItem(cacheKey, JSON.stringify({
+                        location: location,
+                        timestamp: Date.now()
+                    }));
+                    
+                    // Обновляем контент
+                    this.updateRegionalContent(location);
+                    
+                    // Сохраняем в cookie
+                    document.cookie = `user_region=${encodeURIComponent(location.region)}; path=/; max-age=86400`;
+                    document.cookie = `user_city=${encodeURIComponent(location.city)}; path=/; max-age=86400`;
+                }
+            })
+            .fail(() => {
+                // Используем настройки по умолчанию
+                this.updateRegionalContent({
+                    country: 'RU',
+                    region: 'Moscow',
+                    city: 'Москва'
+                });
+            });
+        },
+        
+        // Российские праздники
+        initRussianHolidays: function() {
+            const today = new Date();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            
+            const holidays = {
+                '1-1': 'С Новым годом! 🎄',
+                '1-7': 'С Рождеством Христовым! ✨',
+                '2-23': 'С Днём защитника Отечества! 🎖️',
+                '3-8': 'С Международным женским днём! 💐',
+                '5-1': 'С Праздником Весны и Труда! 🌸',
+                '5-9': 'С Днём Победы! 🎖️',
+                '6-12': 'С Днём России! 🇷🇺',
+                '11-4': 'С Днём народного единства! 🤝'
+            };
+            
+            const key = `${month}-${day}`;
+            
+            if (holidays[key]) {
+                const $banner = $('.holiday-banner');
+                if ($banner.length) {
+                    $banner.text(holidays[key]).show();
+                }
+            }
+        },
+        
+        // Оптимизация для российских браузеров
+        optimizeForRussianBrowsers: function() {
+            const ua = navigator.userAgent;
+            
+            // Яндекс.Браузер
+            if (ua.includes('YaBrowser')) {
+                $('body').addClass('yandex-browser');
+                
+                // Оптимизация для Турбо-режима
+                if (window.outerWidth === 0) {
+                    this.lazyLoadImages();
+                }
+            }
+            
+            // Mail.ru Амиго
+            if (ua.includes('Amigo')) {
+                $('body').addClass('amigo-browser');
+            }
+            
+            // UC Browser
+            if (ua.includes('UCBrowser')) {
+                $('body').addClass('uc-browser');
+            }
+        },
+        
+        // Вспомогательные методы
+        getCityCoordinates: function(city) {
+            const cities = {
+                'Москва': { lat: 55.7558, lon: 37.6173 },
+                'Санкт-Петербург': { lat: 59.9343, lon: 30.3351 },
+                'Новосибирск': { lat: 55.0084, lon: 82.9357 },
+                'Екатеринбург': { lat: 56.8389, lon: 60.6057 },
+                'Казань': { lat: 55.7961, lon: 49.1064 },
+                'Нижний Новгород': { lat: 56.3269, lon: 44.0065 },
+                'Челябинск': { lat: 55.1644, lon: 61.4368 },
+                'Самара': { lat: 53.1959, lon: 50.1002 },
+                'Омск': { lat: 54.9893, lon: 73.3682 },
+                'Ростов-на-Дону': { lat: 47.222, lon: 39.718 },
+                'Уфа': { lat: 54.7348, lon: 55.9578 },
+                'Красноярск': { lat: 56.0153, lon: 92.8932 },
+                'Воронеж': { lat: 51.672, lon: 39.1843 },
+                'Пермь': { lat: 58.0105, lon: 56.2502 },
+                'Волгоград': { lat: 48.708, lon: 44.5133 }
+            };
+            
+            return cities[city] || cities['Москва'];
+        },
+        
+        renderWeather: function($widget, data) {
+            const html = `
+                <div class="weather-info">
+                    <div class="weather-header">
+                        <div class="weather-city">${data.city}</div>
+                        <div class="weather-temp">${data.temp}°C</div>
+                    </div>
+                    <div class="weather-condition">${data.condition}</div>
+                    <div class="weather-details">
+                        <span class="weather-wind">Ветер: ${data.wind_speed} м/с</span>
+                        <span class="weather-humidity">Влажность: ${data.humidity}%</span>
+                    </div>
+                </div>
+            `;
+            
+            $widget.html(html).removeClass('loading');
+        },
+        
+        renderWeatherError: function($widget) {
+            $widget.html(`
+                <div class="weather-error">
+                    <div class="error-icon">☁️</div>
+                    <div class="error-text">Не удалось загрузить погоду</div>
+                </div>
+            `).removeClass('loading');
+        },
+        
+        renderCurrencyRates: function($widgets, rates) {
+            const currencies = ['USD', 'EUR', 'CNY'];
+            let html = '<div class="exchange-rates">';
+            
+            currencies.forEach(code => {
+                if (rates[code]) {
+                    const rate = rates[code];
+                    const change = rate.Value - rate.Previous;
+                    const changeClass = change > 0 ? 'positive' : 'negative';
+                    const changeSymbol = change > 0 ? '↑' : '↓';
+                    
+                    html += `
+                        <div class="exchange-rate">
+                            <div class="currency-code">${code}/₽</div>
+                            <div class="currency-rate">${rate.Value.toFixed(2)}</div>
+                            <div class="currency-change ${changeClass}">
+                                ${changeSymbol} ${Math.abs(change).toFixed(2)}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            
+            $widgets.html(html).removeClass('loading');
+        },
+        
+        renderCurrencyError: function($widgets) {
+            $widgets.html(`
+                <div class="currency-error">
+                    <div class="error-icon">💱</div>
+                    <div class="error-text">Курсы временно недоступны</div>
+                </div>
+            `).removeClass('loading');
+        },
+        
+        loadYandexMapsAPI: function() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = this.config.apiEndpoints.yandexMaps + '?lang=ru_RU&load=package.full';
+                script.async = true;
+                
+                script.onload = () => resolve();
+                script.onerror = () => reject();
+                
+                document.head.appendChild(script);
+            });
+        },
+        
+        renderMaps: function($maps) {
+            if (typeof ymaps === 'undefined') return;
+            
+            ymaps.ready(() => {
+                $maps.each((index, mapElement) => {
+                    const $map = $(mapElement);
+                    const mapId = $map.attr('id') || `yandex-map-${index}`;
+                    $map.attr('id', mapId);
+                    
+                    const lat = parseFloat($map.data('lat')) || 55.7558;
+                    const lon = parseFloat($map.data('lon')) || 37.6173;
+                    const zoom = parseInt($map.data('zoom')) || 12;
+                    const title = $map.data('title') || 'Местоположение';
+                    
+                    try {
+                        const map = new ymaps.Map(mapId, {
+                            center: [lat, lon],
+                            zoom: zoom,
+                            controls: ['zoomControl', 'fullscreenControl']
+                        });
+                        
+                        const placemark = new ymaps.Placemark([lat, lon], {
+                            balloonContent: title
+                        }, {
+                            preset: 'islands#icon',
+                            iconColor: '#ff0000'
+                        });
+                        
+                        map.geoObjects.add(placemark);
+                        
+                        // Центрируем карту
+                        map.setBounds(map.geoObjects.getBounds(), {
+                            checkZoomRange: true
+                        });
+                        
+                    } catch (error) {
+                        console.error('Ошибка инициализации карты:', error);
+                        $map.html('<div class="map-error">Не удалось загрузить карту</div>');
+                    }
+                });
+            });
+        },
+        
+        updateRegionalContent: function(location) {
+            $('.regional-content').each((index, element) => {
+                const $element = $(element);
+                const regions = $element.data('regions');
+                
+                if (regions) {
+                    const regionList = regions.split(',');
+                    if (regionList.includes('all') || regionList.includes(location.region)) {
+                        $element.show();
+                    } else {
+                        $element.hide();
+                    }
+                }
+            });
+            
+            // Обновляем текст для региона
+            $('[data-region-text]').each((index, element) => {
+                const $element = $(element);
+                const region = $element.data('region-text');
+                
+                if (region === location.region || region === 'all') {
+                    $element.show();
+                }
+            });
+        },
+        
+        lazyLoadImages: function() {
+            $('img[data-src]').each((index, img) => {
+                const $img = $(img);
+                const src = $img.data('src');
+                
+                if (src) {
+                    $img.attr('src', src).removeAttr('data-src');
+                }
+            });
+        },
+        
+        // Отслеживание соц. действий
+        trackSocialAction: function(network, action) {
+            if (typeof ym !== 'undefined') {
+                ym(newscore_ru_secure.yandex_metrika_id, 'reachGoal', `social_${network}_${action}`);
+            }
+            
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'social_share', {
-                    'event_category': 'social',
-                    'event_label': social,
-                    'value': 1
+                gtag('event', 'social_action', {
+                    event_category: 'social',
+                    event_label: `${network}_${action}`,
+                    value: 1
                 });
             }
-        });
-    }
-    
-    // Определение российского праздника
-    function getRussianHoliday() {
-        var today = new Date();
-        var month = today.getMonth() + 1;
-        var day = today.getDate();
+        },
         
-        var holidays = {
-            '1-1': 'Новый год',
-            '1-2': 'Новогодние каникулы',
-            '1-7': 'Рождество Христово',
-            '2-23': 'День защитника Отечества',
-            '3-8': 'Международный женский день',
-            '5-1': 'Праздник Весны и Труда',
-            '5-9': 'День Победы',
-            '6-12': 'День России',
-            '11-4': 'День народного единства'
-        };
+        // Инициализация VK виджетов
+        initVKWidgets: function() {
+            if (typeof VK === 'undefined') return;
+            
+            // Комментарии
+            $('[data-vk-comments]').each((index, element) => {
+                const $element = $(element);
+                const postId = $element.data('post-id') || 0;
+                
+                VK.Widgets.Comments(element.id, {
+                    limit: 10,
+                    attach: false,
+                    pageUrl: window.location.href
+                }, postId);
+            });
+            
+            // Кнопки "Мне нравится"
+            $('[data-vk-like]').each((index, element) => {
+                VK.Widgets.Like(element.id, {
+                    pageUrl: window.location.href,
+                    height: 20
+                });
+            });
+        },
         
-        var key = month + '-' + day;
-        if (holidays[key]) {
-            $('.holiday-banner').text('Сегодня: ' + holidays[key]);
-            $('.holiday-banner').show();
+        // Инициализация OK виджетов
+        initOKWidgets: function() {
+            if (typeof OK === 'undefined') return;
+            
+            $('[data-ok-widget]').each((index, element) => {
+                const $element = $(element);
+                const type = $element.data('widget-type') || 'like';
+                
+                OK.CONNECT.insertWidget(
+                    element,
+                    type,
+                    '{"st.cmd":"WidgetsShare","st.type":"small","st.orientation":"horizontal"}'
+                );
+            });
         }
-    }
+    };
     
     // Инициализация
-    if ($('.weather-widget').length) {
-        loadYandexWeather();
-    }
-    
-    if ($('.exchange-rates-widget').length) {
-        loadExchangeRates();
-        // Обновляем каждые 5 минут
-        setInterval(loadExchangeRates, 300000);
-    }
-    
-    if ($('[data-yandex-map]').length) {
-        initYandexMaps();
-    }
-    
-    if ($('.share-btn').length) {
-        trackRussianSocialShares();
-    }
-    
-    if ($('.holiday-banner').length) {
-        getRussianHoliday();
-    }
-    
-    // Адаптация для Яндекса.Браузера
-    if (navigator.userAgent.indexOf('YaBrowser') !== -1) {
-        $('body').addClass('yandex-browser');
+    $(document).ready(() => {
+        RussianServices.init();
         
-        // Оптимизация для Турбо-режима
-        if (window.outerWidth === 0) {
-            // Турбо-режим активен
-            $('img').each(function() {
-                var src = $(this).attr('src');
-                if (src && !src.includes('data:image')) {
-                    $(this).attr('data-src', src);
-                    $(this).removeAttr('src');
-                }
-            });
-        }
-    }
-    
-    // Определение региона пользователя
-    function detectUserRegion() {
-        $.ajax({
-            url: 'https://api.sypexgeo.net/json/',
-            method: 'GET',
-            success: function(response) {
-                if (response.country && response.country.iso === 'RU') {
-                    localStorage.setItem('user_region', response.region.name_en);
-                    localStorage.setItem('user_city', response.city.name_en);
-                    
-                    // Показываем региональный контент
-                    $('.regional-content').each(function() {
-                        var region = $(this).data('region');
-                        if (region === response.region.name_en || region === 'all') {
-                            $(this).show();
-                        }
-                    });
-                }
-            }
+        // Отслеживание соц. кнопок
+        $(document).on('click', '.share-btn', function() {
+            const network = $(this).data('network') || 'unknown';
+            RussianServices.trackSocialAction(network, 'share');
         });
-    }
+        
+        // Обновление курсов каждые 5 минут
+        setInterval(() => {
+            RussianServices.loadCurrencyRates();
+        }, 300000);
+    });
     
-    // Проверяем, нужно ли определить регион
-    if (!localStorage.getItem('user_region')) {
-        detectUserRegion();
-    }
-});
+})(jQuery);
