@@ -797,7 +797,7 @@ $result = $importer->create_test_news_post();
 Для вопросов и предложений:
 
 · Создайте issue в репозитории
-· Напишите на support@worldnews.ru
+· Напишите по контактам на сайте  https://tmnmed.ru
 · Обратитесь к документации темы
 
 ---
