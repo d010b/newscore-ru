@@ -568,4 +568,67 @@ require_once NEWSCORE_DIR . '/inc/customizer.php';
 // ============================================================================
 // ЗАВЕРШЕНИЕ ФАЙЛА
 // ============================================================================
+/**
+ * Подключение системы импорта тестового контента
+ */
+function newscore_load_test_content_importer() {
+    // Подключаем только в админке
+    if (is_admin() || (defined('WP_CLI') && WP_CLI)) {
+        // Основной файл импорта
+        require_once get_template_directory() . '/import-test-content.php';
+        
+        // Шорткоды для фронтенда
+        if (!is_admin()) {
+            require_once get_template_directory() . '/shortcode-import.php';
+        }
+    }
+    
+    // Установочный скрипт
+    if (isset($_GET['setup_test_content']) && $_GET['setup_test_content'] === '1') {
+        require_once get_template_directory() . '/setup-test-content.php';
+    }
+}
+add_action('after_setup_theme', 'newscore_load_test_content_importer');
+
+/**
+ * Добавляем пункт в административную панель
+ */
+function newscore_add_import_admin_bar($wp_admin_bar) {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    
+    $wp_admin_bar->add_node(array(
+        'id'    => 'newscore-import',
+        'title' => 'Импорт тестового контента',
+        'href'  => admin_url('tools.php?page=newscore-import-test-content'),
+        'meta'  => array(
+            'title' => 'Импортировать тестовый контент для NewsCore',
+            'class' => 'newscore-import-toolbar'
+        )
+    ));
+}
+add_action('admin_bar_menu', 'newscore_add_import_admin_bar', 100);
+
+/**
+ * CSS для админ-бара
+ */
+function newscore_import_admin_bar_css() {
+    if (!is_admin_bar_showing()) {
+        return;
+    }
+    ?>
+    <style>
+    #wp-admin-bar-newscore-import .ab-item {
+        color: #f05a28 !important;
+    }
+    #wp-admin-bar-newscore-import:hover .ab-item {
+        color: #fff !important;
+        background: #0073aa;
+    }
+    </style>
+    <?php
+}
+add_action('wp_head', 'newscore_import_admin_bar_css');
+add_action('admin_head', 'newscore_import_admin_bar_css');
 ?>

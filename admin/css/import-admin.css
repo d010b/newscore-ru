@@ -1,0 +1,212 @@
+/* NewsCore Import Admin Styles */
+
+.newscore-import-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.newscore-import-wrapper h1 {
+    color: #0073aa;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f05a28;
+}
+
+.import-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.import-section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.import-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.import-section.full-width {
+    grid-column: 1 / -1;
+}
+
+.import-section h2 {
+    color: #333;
+    font-size: 1.3em;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f5f5f5;
+}
+
+.import-section h3 {
+    color: #0073aa;
+    margin-top: 0;
+}
+
+.section-content {
+    padding: 15px 0;
+}
+
+.section-content ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.section-content li {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.import-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.import-all-btn {
+    background: #d54e21;
+    border-color: #c1481f;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 25px;
+    font-size: 1.1em;
+}
+
+.import-all-btn:hover {
+    background: #c1481f;
+    border-color: #a93f1a;
+}
+
+.import-status {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 4px;
+    display: none;
+}
+
+.import-status.success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    display: block;
+}
+
+.import-status.error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    display: block;
+}
+
+.import-status.loading {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+    display: block;
+}
+
+.import-progress {
+    margin: 40px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.progress-bar {
+    height: 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0073aa, #f05a28);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.progress-text {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.warning.notice {
+    margin: 15px 0;
+    padding: 10px;
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .import-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .newscore-import-wrapper {
+        margin: 10px;
+    }
+}
+
+/* Анимации */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Информационные блоки */
+.section-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    border-left: 4px solid #0073aa;
+}
+
+.section-info p {
+    margin: 5px 0;
+    color: #495057;
+}
+
+.section-info strong {
+    color: #212529;
+}
+
+/* Ссылки в статусе */
+.status-links {
+    margin-top: 10px;
+}
+
+.status-links a {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 5px 10px;
+    background: #fff;
+    border: 1px solid #0073aa;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #0073aa;
+    font-size: 0.9em;
+}
+
+.status-links a:hover {
+    background: #0073aa;
+    color: #fff;
+}
