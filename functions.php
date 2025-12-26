@@ -1,4 +1,7 @@
 <?php
+// Подключение функций безопасности
+//require_once get_template_directory() . '/inc/security-headers.php';
+//
 /**
  * NewsCore - WordPress тема для российского новостного сайта
  * Безопасная версия с исправленными уязвимостями
@@ -316,6 +319,14 @@ add_action('init', 'newscore_register_ajax_handlers');
  * Безопасная загрузка новостей
  */
 function newscore_load_more_posts_secure() {
+    // Проверка nonce для безопасности
+    if (!isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'newscore_nonce')) {
+        wp_send_json_error(array(
+            'message' => esc_html__('Ошибка безопасности', 'newscore')
+        ));
+        return;
+    }
+
     // Проверка nonce
     if (!isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'newscore_nonce')) {
         wp_send_json_error(array(
@@ -369,6 +380,12 @@ function newscore_load_more_posts_secure() {
  * Безопасное согласие
  */
 function newscore_record_consent_secure() {
+    // Проверка nonce для безопасности
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'newscore_roskom_nonce')) {
+        wp_send_json_error(array('message' => 'Invalid nonce'));
+        return;
+    }
+
     // Проверка nonce
     if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'newscore_roskom_nonce')) {
         wp_send_json_error(array('message' => 'Invalid nonce'));

@@ -106,7 +106,7 @@ if ($slider_posts->have_posts()) :
                 ?>
                 
                 <div class="<?php echo esc_attr($slide_class); ?>" 
-                     data-slide="<?php echo $slide_index; ?>"
+                     data-slide="<?php echo esc_html(); ?>"
                      role="group" 
                      aria-roledescription="slide"
                      aria-label="<?php echo esc_attr(sprintf(__('Slide %d of %d: %s', 'newscore'), 
@@ -146,7 +146,7 @@ if ($slider_posts->have_posts()) :
                         
                         <?php if (!empty($post_excerpt)) : ?>
                             <div class="slide-excerpt">
-                                <?php echo wp_trim_words($post_excerpt, 15); ?>
+                                <?php echo wp_trim_words(esc_html($post_excerpt), 15); ?>
                             </div>
                         <?php endif; ?>
                         
@@ -201,7 +201,7 @@ if ($slider_posts->have_posts()) :
             <div class="slider-dots" role="tablist" aria-label="<?php esc_attr_e('Slide navigation dots', 'newscore'); ?>">
                 <?php for ($i = 1; $i <= $total_slides; $i++) : ?>
                     <button class="slider-dot <?php echo $i === 1 ? 'active' : ''; ?>" 
-                            data-slide="<?php echo $i; ?>"
+                            data-slide="<?php echo esc_html(); ?>"
                             role="tab"
                             aria-label="<?php echo esc_attr(sprintf(__('Go to slide %d', 'newscore'), $i)); ?>"
                             aria-selected="<?php echo $i === 1 ? 'true' : 'false'; ?>"

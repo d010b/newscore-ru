@@ -153,7 +153,7 @@ class Newscore_Legal_Info_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('title')); ?>" 
                        type="text" 
-                       value="<?php echo $title; ?>"
+                       value="<?php echo esc_html(); ?>"
                        placeholder="<?php esc_attr_e('Юридическая информация', 'newscore'); ?>">
             </p>
             
@@ -165,7 +165,7 @@ class Newscore_Legal_Info_Widget extends WP_Widget {
                           id="<?php echo esc_attr($this->get_field_id('legal_text')); ?>" 
                           name="<?php echo esc_attr($this->get_field_name('legal_text')); ?>" 
                           rows="5"
-                          placeholder="<?php esc_attr_e('Дополнительная юридическая информация...', 'newscore'); ?>"><?php echo $legal_text; ?></textarea>
+                          placeholder="<?php esc_attr_e('Дополнительная юридическая информация...', 'newscore'); ?>"><?php echo esc_html(); ?></textarea>
                 <small class="description">
                     <?php esc_html_e('HTML теги разрешены: a, strong, em, br, p', 'newscore'); ?>
                 </small>
@@ -414,7 +414,7 @@ class Newscore_Editorial_Contacts_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('title')); ?>" 
                        type="text" 
-                       value="<?php echo $title; ?>">
+                       value="<?php echo esc_html(); ?>">
             </p>
             
             <p>
@@ -424,7 +424,7 @@ class Newscore_Editorial_Contacts_Widget extends WP_Widget {
                 <textarea class="widefat" 
                           id="<?php echo esc_attr($this->get_field_id('additional_info')); ?>" 
                           name="<?php echo esc_attr($this->get_field_name('additional_info')); ?>" 
-                          rows="4"><?php echo $additional_info; ?></textarea>
+                          rows="4"><?php echo esc_html(); ?></textarea>
                 <small class="description">
                     <?php esc_html_e('Например: время работы, дни приема материалов, условия сотрудничества', 'newscore'); ?>
                 </small>

@@ -58,12 +58,12 @@
             </div>
             
             <h3 class="post-title">
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
             </h3>
         </header>
         
         <div class="post-excerpt">
-            <?php echo wp_trim_words(get_the_excerpt(), 20); ?>
+            <?php echo wp_trim_words(esc_html(get_the_excerpt()), 20); ?>
         </div>
         
         <div class="post-footer">

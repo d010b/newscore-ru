@@ -48,10 +48,10 @@ get_header();
                                 <span class="post-date"><?php echo get_the_date(); ?></span>
                             </div>
                             <h3 class="post-title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
                             </h3>
                             <div class="post-excerpt">
-                                <?php the_excerpt(); ?>
+                                <?php echo esc_html(get_the_excerpt()); ?>
                             </div>
                             <div class="post-meta-bottom">
                                 <span class="post-author">

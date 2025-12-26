@@ -38,7 +38,7 @@ get_header();
                                     <?php if (has_post_thumbnail()) : ?>
                                         <?php the_post_thumbnail('newscore-medium'); ?>
                                     <?php else : ?>
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-thumb.jpg" alt="<?php the_title(); ?>">
+                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-thumb.jpg" alt="<?php echo esc_html(get_the_title()); ?>">
                                     <?php endif; ?>
                                 </a>
                             </div>
@@ -58,7 +58,7 @@ get_header();
                                     </div>
                                     
                                     <h2 class="post-title">
-                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
                                     </h2>
                                 </header>
                                 

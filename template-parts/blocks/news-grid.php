@@ -55,11 +55,11 @@ if (!empty($categories) && is_array($categories)) :
             }
 ?>
             
-            <section class="category-section <?php echo $category_class; ?>">
+            <section class="category-section <?php echo esc_html(); ?>">
                 <div class="section-header">
                     <h2 class="section-title">
-                        <a href="<?php echo $category_link; ?>">
-                            <?php echo $category_name; ?>
+                        <a href="<?php echo esc_html(); ?>">
+                            <?php echo esc_html(); ?>
                         </a>
                     </h2>
                     
@@ -69,7 +69,7 @@ if (!empty($categories) && is_array($categories)) :
                         </div>
                     <?php endif; ?>
                     
-                    <a href="<?php echo $category_link; ?>" class="section-more" aria-label="<?php 
+                    <a href="<?php echo esc_html(); ?>" class="section-more" aria-label="<?php 
                         echo esc_attr(sprintf(__('View all posts in %s', 'newscore'), $category_name)); 
                     ?>">
                         <?php esc_html_e('View All', 'newscore'); ?>
@@ -92,7 +92,7 @@ if (!empty($categories) && is_array($categories)) :
                         if ($post_count === 1) :
                             // Первый пост - большой
                             ?>
-                            <article class="category-post category-post-large" data-post-id="<?php echo $post_id; ?>">
+                            <article class="category-post category-post-large" data-post-id="<?php echo esc_html(); ?>">
                                 <div class="post-thumbnail">
                                     <a href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
                                         <?php if (has_post_thumbnail()) : 
@@ -112,7 +112,7 @@ if (!empty($categories) && is_array($categories)) :
                                 
                                 <div class="post-content">
                                     <h3 class="post-title">
-                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
                                     </h3>
                                     
                                     <div class="post-excerpt">
@@ -145,7 +145,7 @@ if (!empty($categories) && is_array($categories)) :
                         <?php else : 
                             // Остальные посты - маленькие
                             ?>
-                            <article class="category-post-item" data-post-id="<?php echo $post_id; ?>">
+                            <article class="category-post-item" data-post-id="<?php echo esc_html(); ?>">
                                 <div class="post-thumbnail-small">
                                     <a href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
                                         <?php if (has_post_thumbnail()) : 
@@ -163,7 +163,7 @@ if (!empty($categories) && is_array($categories)) :
                                 
                                 <div class="post-content-small">
                                     <h4 class="post-title-small">
-                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                        <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
                                     </h4>
                                     
                                     <div class="post-meta-small">
@@ -184,7 +184,7 @@ if (!empty($categories) && is_array($categories)) :
                 
                 <?php if ($category_posts->found_posts > $posts_per_category) : ?>
                     <div class="category-view-more">
-                        <a href="<?php echo $category_link; ?>" class="button">
+                        <a href="<?php echo esc_html(); ?>" class="button">
                             <?php 
                             printf(
                                 esc_html__('View all %d posts', 'newscore'),

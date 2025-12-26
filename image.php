@@ -11,7 +11,7 @@ get_header();
             <?php while (have_posts()) : the_post(); ?>
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                     <header class="entry-header">
-                        <h1 class="entry-title"><?php the_title(); ?></h1>
+                        <h1 class="entry-title"><?php echo esc_html(get_the_title()); ?></h1>
                         
                         <div class="entry-meta">
                             <span class="posted-on">
@@ -34,7 +34,7 @@ get_header();
                             
                             <?php if (has_excerpt()) : ?>
                                 <div class="attachment-caption">
-                                    <?php the_excerpt(); ?>
+                                    <?php echo esc_html(get_the_excerpt()); ?>
                                 </div>
                             <?php endif; ?>
                             

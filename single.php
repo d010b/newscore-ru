@@ -24,7 +24,7 @@ get_header();
                         </div>
                     <?php endif; ?>
                     
-                    <h1 class="entry-title"><?php the_title(); ?></h1>
+                    <h1 class="entry-title"><?php echo esc_html(get_the_title()); ?></h1>
                     
                     <div class="entry-meta">
                         <div class="meta-author">
@@ -165,7 +165,7 @@ get_header();
                                         <?php endif; ?>
                                         <div class="related-content">
                                             <h4 class="related-post-title">
-                                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                                <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
                                             </h4>
                                             <div class="related-meta">
                                                 <span class="related-date"><?php echo get_the_date(); ?></span>

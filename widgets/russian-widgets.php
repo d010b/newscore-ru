@@ -417,7 +417,7 @@ class Newscore_Yandex_Weather_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('title')); ?>" 
                        type="text" 
-                       value="<?php echo $title; ?>">
+                       value="<?php echo esc_html(); ?>">
             </p>
             
             <p>
@@ -428,7 +428,7 @@ class Newscore_Yandex_Weather_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('city')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('city')); ?>" 
                        type="text" 
-                       value="<?php echo $city; ?>"
+                       value="<?php echo esc_html(); ?>"
                        placeholder="<?php esc_attr_e('Например: Москва, Санкт-Петербург, Новосибирск', 'newscore'); ?>">
                 <small class="description">
                     <?php esc_html_e('Укажите город на русском языке', 'newscore'); ?>
@@ -739,7 +739,7 @@ class Newscore_Exchange_Rates_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('title')); ?>" 
                        type="text" 
-                       value="<?php echo $title; ?>">
+                       value="<?php echo esc_html(); ?>">
             </p>
             
             <div class="widget-description">
@@ -943,7 +943,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('title')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('title')); ?>" 
                        type="text" 
-                       value="<?php echo $title; ?>">
+                       value="<?php echo esc_html(); ?>">
             </p>
             
             <p>
@@ -954,7 +954,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('group_id')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('group_id')); ?>" 
                        type="number" 
-                       value="<?php echo $group_id; ?>"
+                       value="<?php echo esc_html(); ?>"
                        placeholder="12345678"
                        min="1">
                 <small class="description">
@@ -984,7 +984,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('width')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('width')); ?>" 
                        type="text" 
-                       value="<?php echo $width; ?>"
+                       value="<?php echo esc_html(); ?>"
                        placeholder="auto">
                 <small class="description">
                     <?php esc_html_e('Например: 300, 100%, auto', 'newscore'); ?>
@@ -999,7 +999,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                        id="<?php echo esc_attr($this->get_field_id('height')); ?>" 
                        name="<?php echo esc_attr($this->get_field_name('height')); ?>" 
                        type="number" 
-                       value="<?php echo $height; ?>"
+                       value="<?php echo esc_html(); ?>"
                        min="200" 
                        max="1000">
             </p>
@@ -1015,7 +1015,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                            id="<?php echo esc_attr($this->get_field_id('color1')); ?>" 
                            name="<?php echo esc_attr($this->get_field_name('color1')); ?>" 
                            type="text" 
-                           value="<?php echo $color1; ?>"
+                           value="<?php echo esc_html(); ?>"
                            data-default-color="#FFFFFF">
                 </p>
                 
@@ -1027,7 +1027,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                            id="<?php echo esc_attr($this->get_field_id('color2')); ?>" 
                            name="<?php echo esc_attr($this->get_field_name('color2')); ?>" 
                            type="text" 
-                           value="<?php echo $color2; ?>"
+                           value="<?php echo esc_html(); ?>"
                            data-default-color="#2B587A">
                 </p>
                 
@@ -1039,7 +1039,7 @@ class Newscore_VK_Group_Widget extends WP_Widget {
                            id="<?php echo esc_attr($this->get_field_id('color3')); ?>" 
                            name="<?php echo esc_attr($this->get_field_name('color3')); ?>" 
                            type="text" 
-                           value="<?php echo $color3; ?>"
+                           value="<?php echo esc_html(); ?>"
                            data-default-color="#5B7FA6">
                 </p>
             </div>

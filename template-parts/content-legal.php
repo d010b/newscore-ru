@@ -6,7 +6,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('legal-page'); ?>>
     <header class="legal-header">
-        <h1 class="legal-title"><?php the_title(); ?></h1>
+        <h1 class="legal-title"><?php echo esc_html(get_the_title()); ?></h1>
         <div class="legal-meta">
             <?php 
             // Проверяем наличие функции get_field (ACF плагин)

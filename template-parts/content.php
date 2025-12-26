@@ -9,7 +9,7 @@
             <?php if (has_post_thumbnail()) : ?>
                 <?php the_post_thumbnail('newscore-medium'); ?>
             <?php else : ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-thumb.jpg" alt="<?php the_title(); ?>">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-thumb.jpg" alt="<?php echo esc_html(get_the_title()); ?>">
             <?php endif; ?>
         </a>
         <?php
@@ -59,12 +59,12 @@
             </div>
             
             <h3 class="post-title">
-                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
             </h3>
         </header>
         
         <div class="post-excerpt">
-            <?php echo wp_trim_words(get_the_excerpt(), 25); ?>
+            <?php echo wp_trim_words(esc_html(get_the_excerpt()), 20); ?>
         </div>
         
         <div class="post-footer">

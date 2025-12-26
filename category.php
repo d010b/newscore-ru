@@ -47,14 +47,14 @@ $category = get_queried_object();
                                 <?php if (has_post_thumbnail()) : ?>
                                     <?php the_post_thumbnail('newscore-large'); ?>
                                 <?php else : ?>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-thumb.jpg" alt="<?php the_title(); ?>">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default-thumb.jpg" alt="<?php echo esc_html(get_the_title()); ?>">
                                 <?php endif; ?>
                             </a>
                         </div>
                         
                         <div class="featured-content">
                             <h2 class="featured-title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                <a href="<?php the_permalink(); ?>"><?php echo esc_html(get_the_title()); ?></a>
                             </h2>
                             
                             <div class="post-meta">
@@ -64,7 +64,7 @@ $category = get_queried_object();
                             </div>
                             
                             <div class="post-excerpt">
-                                <?php the_excerpt(); ?>
+                                <?php echo esc_html(get_the_excerpt()); ?>
                             </div>
                             
                             <a href="<?php the_permalink(); ?>" class="read-more">

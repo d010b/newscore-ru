@@ -148,7 +148,7 @@ function newscore_russian_share_buttons() {
         <h4>Поделиться:</h4>
         <div class="share-buttons-grid">
             <!-- VK -->
-            <a href="https://vk.com/share.php?url=<?php echo $url; ?>&title=<?php echo $title; ?>&image=<?php echo $image; ?>" 
+            <a href="https://vk.com/share.php?url=<?php echo esc_html(); ?>&title=<?php echo esc_html(); ?>&image=<?php echo esc_html(); ?>" 
                target="_blank" 
                class="share-btn vk"
                title="Поделиться ВКонтакте">
@@ -156,7 +156,7 @@ function newscore_russian_share_buttons() {
             </a>
             
             <!-- Одноклассники -->
-            <a href="https://connect.ok.ru/dk?st.cmd=WidgetSharePreview&st.shareUrl=<?php echo $url; ?>" 
+            <a href="https://connect.ok.ru/dk?st.cmd=WidgetSharePreview&st.shareUrl=<?php echo esc_html(); ?>" 
                target="_blank" 
                class="share-btn ok"
                title="Поделиться в Одноклассниках">
@@ -164,7 +164,7 @@ function newscore_russian_share_buttons() {
             </a>
             
             <!-- Telegram -->
-            <a href="https://t.me/share/url?url=<?php echo $url; ?>&text=<?php echo $title; ?>" 
+            <a href="https://t.me/share/url?url=<?php echo esc_html(); ?>&text=<?php echo esc_html(); ?>" 
                target="_blank" 
                class="share-btn telegram"
                title="Поделиться в Telegram">
@@ -180,7 +180,7 @@ function newscore_russian_share_buttons() {
             </a>
             
             <!-- Mail.ru -->
-            <a href="https://connect.mail.ru/share?url=<?php echo $url; ?>&title=<?php echo $title; ?>" 
+            <a href="https://connect.mail.ru/share?url=<?php echo esc_html(); ?>&title=<?php echo esc_html(); ?>" 
                target="_blank" 
                class="share-btn mailru"
                title="Поделиться в Mail.ru">
